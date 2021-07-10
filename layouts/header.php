@@ -21,6 +21,14 @@
             padding: 20px;
             border-radius: 20px;
         }
+
+        .item {
+            width: 100px;
+            margin: 40px auto -30px;
+            display: block;
+            position: relative;
+            top: -30px;
+        }
     </style>
 </head>
 

@@ -26,6 +26,7 @@ mysqli_close($connection);
         <?php foreach ($items as $key => $item): ?>
             <div class="col s6 md3">
                 <div class="card z-depth-0">
+                    <img src="images/product.png" class="item" alt="<?php echo $item['item_name']; ?>">
                     <div class="card-content center">
                         <h6><?php echo htmlspecialchars($item['item_name']); ?></h6>
                         <div>₹ <?php echo htmlspecialchars($item['item_price']) ?></div>
