@@ -1,15 +1,9 @@
 <?php
 
-//database connection
-$connection = mysqli_connect('localhost', 'test', 'test', 'mahi_collection');
-
-//check connection
-if (!$connection) {
-    echo "Connection Error " . mysqli_connect_error();
-}
+include 'config/db_connect.php';
 
 //query to get all items list
-$query = 'SELECT * from items ORDER BY created_at';
+$query = "SELECT * from items ORDER BY created_at";
 //getting data
 $result = mysqli_query($connection, $query);
 //fetching data in as an array
@@ -25,7 +19,6 @@ mysqli_close($connection);
 <html lang="en">
 
 <?php include 'layouts/header.php'; ?>
-
 <h4 class="center">Items</h4>
 
 <div class="container">
@@ -48,7 +41,7 @@ mysqli_close($connection);
                     </div>
 
                     <div class="card-action right-align">
-                        <a class="brand-text" href="#">more info</a>
+                        <a class="brand-text" href="item-details.php?id=<?php echo $item['id']; ?>">more info</a>
                     </div>
                 </div>
             </div>

@@ -48,25 +48,37 @@ if (isset($_POST['submit'])) {
         }
     }
     //item tags
-    if(empty($_POST['item_tags'])){
+    if (empty($_POST['item_tags'])) {
         echo 'At least one ingredient is required <br />';
-    } else{
+    } else {
         $item_tags = $_POST['item_tags'];
-        if(!preg_match('/^([a-zA-Z\s]+)(,\s*[a-zA-Z\s]*)*$/', $item_tags)){
+        if (!preg_match('/^([a-zA-Z\s]+)(,\s*[a-zA-Z\s]*)*$/', $item_tags)) {
             echo 'item_tags must be a comma separated list';
         }
     }
 
     //check for errors
-    if(array_filter($errors)){
+    if (array_filter($errors)) {
         //if errors does nothing
     } else {
         //if no error
-        header('Location: index.php');
+        include 'config/db_connect.php';
+
+        $item_name = mysqli_real_escape_string($connection, $_POST['item_name']);
+        $item_price = mysqli_real_escape_string($connection, $_POST['item_price']);
+        $item_tags = mysqli_real_escape_string($connection, $_POST['item_tags']);
+        $name = mysqli_real_escape_string($connection, $_POST['name']);
+        $email = mysqli_real_escape_string($connection, $_POST['email']);
+        $description = mysqli_real_escape_string($connection, $_POST['description']);
+        
+        //query
+        $query = "INSERT INTO items(item_name,item_price,item_tags,name,email,description,) VALUES('$item_name', '$item_price', '$item_tags', '$name', '$email', '$description')";
+        if(mysqli_query($connection, $query)){
+            header('Location: index.php');
+        }else{
+            echo 'query error ' . mysqli_error($connection);
+        }
     }
-
-    //after validation
-
 }
 ?>
 
