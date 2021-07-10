@@ -1,6 +1,6 @@
 <?php
-$item_name = $item_price = $name = $email = $description = '';
-$errors = array('email' => '', 'name' => '', 'item_name' => '', 'item_price' => '', 'description' => '');
+$item_name = $item_price = $name = $email = $description = $item_tags = '';
+$errors = array('email' => '', 'name' => '', 'item_name' => '', 'item_price' => '', 'description' => '', 'item_tags' => '');
 if (isset($_POST['submit'])) {
     //check item name
     if (empty($_POST['item_name'])) {
@@ -47,6 +47,15 @@ if (isset($_POST['submit'])) {
             $errors['description'] = "Description must be letters and spaces only";
         }
     }
+    //item tags
+    if(empty($_POST['item_tags'])){
+        echo 'At least one ingredient is required <br />';
+    } else{
+        $item_tags = $_POST['item_tags'];
+        if(!preg_match('/^([a-zA-Z\s]+)(,\s*[a-zA-Z\s]*)*$/', $item_tags)){
+            echo 'item_tags must be a comma separated list';
+        }
+    }
 
     //check for errors
     if(array_filter($errors)){
@@ -75,6 +84,9 @@ if (isset($_POST['submit'])) {
         <label class="brown-text" for="item_price">Item Price</label>
         <input type="number" name="item_price" id="item_price" placeholder="Enter Item Price.." required value="<?php echo htmlspecialchars($item_price) ?>">
         <div class="red-text"><?php echo $errors['item_price'] ?></div>
+        <label class="brown-text" for="item_tags">Item Tags</label>
+        <input type="text" name="item_tags" id="item_tags" placeholder="Enter Tags.." required value="<?php echo htmlspecialchars($item_tags) ?>">
+        <div class="red-text"><?php echo $errors['item_tags'] ?></div>
         <label class="brown-text" for="name">Your Name</label>
         <input type="text" name="name" id="name" placeholder="Enter Your Name.." required value="<?php echo htmlspecialchars($name) ?>">
         <div class="red-text"><?php echo $errors['name'] ?></div>
