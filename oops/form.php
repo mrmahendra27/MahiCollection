@@ -26,12 +26,12 @@ if(isset($_POST['submit'])){
         <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
 
         <label for="name">Name</label>
-        <input type="text" name="name" id="name" placeholder="name" value="<?php echo htmlspecialchars($_POST['name']) ?? '' ?>">
+        <input type="text" name="name" id="name" placeholder="name" value="<?php echo htmlspecialchars($_POST['name'] ?? '') ?? '' ?>">
     <div class="error">
         <?php echo $errors['name'] ?? '' ?>
     </div>
         <label for="email">Email</label>
-        <input type="text" name="email" id="email" placeholder="email" value="<?php echo htmlspecialchars($_POST['email']) ?? '' ?>">
+        <input type="text" name="email" id="email" placeholder="email" value="<?php echo htmlspecialchars($_POST['email'] ?? '') ?? '' ?>">
         <div class="error">
         <?php echo $errors['email'] ?? '' ?>
     </div>
