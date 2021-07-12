@@ -70,12 +70,16 @@ if (isset($_POST['submit'])) {
         $name = mysqli_real_escape_string($connection, $_POST['name']);
         $email = mysqli_real_escape_string($connection, $_POST['email']);
         $description = mysqli_real_escape_string($connection, $_POST['description']);
-        
+
         //query
-        $query = "INSERT INTO items(item_name,item_price,item_tags,name,email,description,) VALUES('$item_name', '$item_price', '$item_tags', '$name', '$email', '$description')";
-        if(mysqli_query($connection, $query)){
+        $query = "INSERT INTO items(item_name,item_price,item_tags,name,email,description) VALUES('$item_name', '$item_price', '$item_tags', '$name', '$email', '$description')";
+        if (mysqli_query($connection, $query)) {
+            session_start();
+
+            $_SESSION['success'] = "Added Item";
+
             header('Location: index.php');
-        }else{
+        } else {
             echo 'query error ' . mysqli_error($connection);
         }
     }
@@ -89,7 +93,7 @@ if (isset($_POST['submit'])) {
 
 <section class="container black-text">
     <h4 class="center">Add a Item</h4>
-    <form action="add-item.php" method="POST" class="white">
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" class="white">
         <label class="brown-text" for="item_name">Item Name</label>
         <input type="text" name="item_name" id="item_name" placeholder="Enter Item Title.." required value="<?php echo htmlspecialchars($item_name) ?>">
         <div class="red-text"><?php echo $errors['item_name'] ?></div>

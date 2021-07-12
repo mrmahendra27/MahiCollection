@@ -1,5 +1,4 @@
 <?php
-
 include 'config/db_connect.php';
 
 //query to get all items list
@@ -13,6 +12,10 @@ mysqli_free_result($result);
 //closing the connection
 mysqli_close($connection);
 //end
+
+session_start();
+
+$success = $_SESSION['success'] ?? '';
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +25,7 @@ mysqli_close($connection);
 <h4 class="center">Items</h4>
 
 <div class="container">
+    <div class="green center"><?php echo htmlspecialchars($success); ?></div>
     <div class="row">
         <?php foreach ($items as $key => $item): ?>
             <div class="col s6 md3">

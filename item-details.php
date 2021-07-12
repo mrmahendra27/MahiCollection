@@ -10,6 +10,9 @@ if (isset($_POST['delete'])) {
     $query = "DELETE FROM items WHERE id = $item_id";
 
     if (mysqli_query($connection, $query)) {
+        session_start();
+
+        $_SESSION['success'] = "Deleted Item";
 
         header('Location: index.php');
     } else {
